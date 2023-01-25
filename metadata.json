@@ -1,9 +1,9 @@
 {
-    "Identifier": "",
-    "Slug": "",
-    "Status": "",
-    "Title": "",
-    "Description": "",
+    "Identifier": "eos1bba",
+    "Slug": "GEM-representation-learning",
+    "Status": "In progress",
+    "Title": "GeoGNN Molecular Representation Prediction",
+    "Description": "GeoGNN uses Graph Neural Networks to represent atoms, bonds, and bond angles in a molecule which can be used to predict properties of molecules",
     "Mode": "",
     "Task": [],
     "Input": [],
@@ -12,8 +12,10 @@
     "Output Type": [],
     "Output Shape": "",
     "Interpretation": "",
-    "Tag": [],
-    "Publication": "",
-    "Source Code": "",
-    "License": ""
+    "Tag": [
+        "GNN"
+    ],
+    "Publication": "https://www.nature.com/articles/s42256-021-00438-4",
+    "Source Code": "https://github.com/PaddlePaddle/PaddleHelix/tree/dev/apps/pretrained_compound/ChemRL/GEM",
+    "License": "N/A"
 }
