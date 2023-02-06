@@ -1,9 +1,21 @@
-# imports
-import os
-import csv
-import sys
-from rdkit import Chem
-from rdkit.Chem.Descriptors import MolWt
+#!/usr/bin/python                                                                                                                                  
+#-*-coding:utf-8-*- 
+#   Copyright (c) 2021 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+"""
+
 import os
 from os.path import join, exists, basename
 import argparse
@@ -24,16 +36,7 @@ from src.featurizer import DownstreamTransformFn, DownstreamCollateFn
 from src.utils import get_dataset, create_splitter, get_downstream_task_names, \
         calc_rocauc_score, exempt_parameters
 
-# parse arguments
-input_file = sys.argv[1]
-output_file = sys.argv[2]
-
-# current file directory
-root = os.path.dirname(os.path.abspath(__file__))
-
-# my model
-def my_model(smiles_list):
-    def main(args):
+def main(args):
     """
     Call the configuration function of the model, build the model and load data, then start training.
     model_config:
@@ -183,21 +186,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     main(args)
-
-
-
-# read SMILES from .csv file, assuming one column with header
-with open(input_file, "r") as f:
-    reader = csv.reader(f)
-    next(reader)  # skip header
-    smiles_list = [r[0] for r in reader]
-
-# run model
-outputs = my_model(smiles_list)
-
-# write output in a .csv file
-with open(output_file, "w") as f:
-    writer = csv.writer(f)
-    writer.writerow(["value"])  # header
-    for o in outputs:
-        writer.writerow([o])
