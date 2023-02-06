@@ -16,6 +16,11 @@
 """
 """
 
+#use bash model
+
+#doesn't know which .py file is running
+#remove all other python paths on computer. ∏
+
 import os
 from os.path import join, exists, basename
 import argparse
@@ -35,6 +40,44 @@ from src.model import DownstreamModel
 from src.featurizer import DownstreamTransformFn, DownstreamCollateFn
 from src.utils import get_dataset, create_splitter, get_downstream_task_names, \
         calc_rocauc_score, exempt_parameters
+
+
+def evaluate(args, model, test_dataset, collate_fn):
+    """
+    Define the evaluate function
+    In the dataset, a proportion of labels are blank. So we use a `valid` tensor 
+    to help eliminate these blank labels in both training and evaluation phase.
+    """
+    data_gen = test_dataset.get_data_loader(
+            batch_size=args.batch_size, 
+            num_workers=args.num_workers, 
+            shuffle=False,
+            collate_fn=collate_fn)
+    total_pred = []
+    total_label = []
+    total_valid = []
+    model.eval()
+    for atom_bond_graphs, bond_angle_graphs, valids, labels in data_gen:
+        atom_bond_graphs = atom_bond_graphs.tensor()
+        bond_angle_graphs = bond_angle_graphs.tensor()
+        labels = paddle.to_tensor(labels, 'float32')
+        valids = paddle.to_tensor(valids, 'float32')
+        preds = model(atom_bond_graphs, bond_angle_graphs)
+        total_pred.append(preds.numpy())
+        total_valid.append(valids.numpy())
+        total_label.append(labels.numpy())
+    total_pred = np.concatenate(total_pred, 0)
+    total_label = np.concatenate(total_label, 0)
+    total_valid = np.concatenate(total_valid, 0)
+    return calc_rocauc_score(total_label, total_pred, total_valid)
+
+def get_pos_neg_ratio(dataset):
+    """tbd"""
+    labels = np.array([data['label'] for data in dataset])
+    return np.mean(labels == 1), np.mean(labels == -1)
+
+
+
 
 def main(args):
     """
