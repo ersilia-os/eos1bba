@@ -26,6 +26,7 @@ def main(args):
 
     compound_encoder = GeoGNNModel(compound_encoder_config)
     model = GeoPredModel(model_config, compound_encoder)
+    model.set_state_dict(paddle.load('./model/tox21/model.pdparams'))
     if args.distributed:
         model = paddle.DataParallel(model)
     opt = paddle.optimizer.Adam(learning_rate=args.lr, parameters=model.parameters())
@@ -48,7 +49,7 @@ def main(args):
     transform_fn = GeoPredTransformFn(model_config['pretrain_tasks'], model_config['mask_ratio'])  # the GeoPred transform function and the colalte function uses MMFF 3D optimization. 
     # this step will be time consuming due to rdkit 3d calculation
     dataset.transform(transform_fn, num_workers=args.num_workers)
-    test_index = int(len(dataset) * (1 - args.test_ratio))
+    #test_index = int(len(dataset) * (1 - args.test_ratio))
     # train_dataset = dataset[:test_index]
     # test_dataset = dataset[test_index:]
     # print("Train/Test num: %s/%s" % (len(train_dataset), len(test_dataset)))
@@ -61,27 +62,12 @@ def main(args):
             pretrain_tasks=model_config['pretrain_tasks'],
             mask_ratio=model_config['mask_ratio'],
             Cm_vocab=model_config['Cm_vocab'])
-    # train_data_gen = train_dataset.get_data_loader(
-    #         batch_size=args.batch_size, 
-    #         num_workers=args.num_workers, 
-    #         shuffle=True, 
-    #         collate_fn=collate_fn)
     
-    # list_test_loss = []
-    # for epoch_id in range(args.max_epoch):
-    #     s = time.time()
-    #     train_loss = train(args, model, opt, train_data_gen)
-    #     test_loss = evaluate(args, model, test_dataset, collate_fn)
-    #     if not args.distributed or dist.get_rank() == 0:
-    #         paddle.save(compound_encoder.state_dict(), 
-    #             '%s/epoch%d.pdparams' % (args.model_dir, epoch_id))
-    #         list_test_loss.append(test_loss['loss'])
-    #         print("epoch:%d train/loss:%s" % (epoch_id, train_loss))
-    #         print("epoch:%d test/loss:%s" % (epoch_id, test_loss))
-    #         print("Time used:%ss" % (time.time() - s))
-    
-    # if not args.distributed or dist.get_rank() == 0:
-    #     print('Best epoch id:%s' % np.argmin(list_test_loss))
+    graph = collate_fn([transform_fn({'smiles': SMILES})])  # edit this line so it takes dataset as input
+    preds = model(graph.tensor()).numpy()[0]
+
+ 
+
 
 
 if __name__ == '__main__':
