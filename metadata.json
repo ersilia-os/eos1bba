@@ -1,6 +1,6 @@
 {
     "Identifier": "eos1bba",
-    "Slug": "GEM-representation-learning",
+    "Slug": "gem-representation-learning",
     "Status": "In progress",
     "Title": "GeoGNN Molecular Representation Prediction",
     "Description": "GeoGNN uses Graph Neural Networks to represent atoms, bonds, and bond angles in a molecule which can be used to predict properties of molecules",
