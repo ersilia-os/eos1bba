@@ -13,7 +13,7 @@
     "Output Shape": "Single",
     "Interpretation": "The output gives us a decimal value. Depending on the input tasks, we can ",
     "Tag": [
-        "GNN"
+        "ZINC"
     ],
     "Publication": "https://www.nature.com/articles/s42256-021-00438-4",
     "Source Code": "https://github.com/PaddlePaddle/PaddleHelix/tree/dev/apps/pretrained_compound/ChemRL/GEM",
