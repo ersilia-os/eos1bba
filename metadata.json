@@ -3,7 +3,7 @@
     "Slug": "gem-representation-learning",
     "Status": "In progress",
     "Title": "GeoGNN Molecular Representation Prediction",
-    "Description": "This model uses Graph Neural Networks to represent atoms, bonds, and bond angles in a molecule which can be used to predict properties of molecules",
+    "Description": "This model uses Graph Neural Networks to represent atoms, bonds, and bond angles in a molecule which can be used to predict properties of molecules. The model combines two graphs, one of which uses atoms as nodes and bonds as edges, while the other graph uses bonds as the nodes and bond angles as the edges. ",
     "Mode": "Pretrained",
     "Task": [1],
     "Input": [0],
