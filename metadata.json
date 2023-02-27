@@ -17,5 +17,5 @@
     ],
     "Publication": "https://www.nature.com/articles/s42256-021-00438-4",
     "Source Code": "https://github.com/PaddlePaddle/PaddleHelix/tree/dev/apps/pretrained_compound/ChemRL/GEM",
-    "License": "N/A"
+    "License": "Apache-2.0"
 }
