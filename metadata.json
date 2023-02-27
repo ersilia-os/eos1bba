@@ -6,7 +6,7 @@
     "Description": "This model uses Graph Neural Networks to represent atoms, bonds, and bond angles in a molecule which can be used to predict properties of molecules. The model combines two graphs, one of which uses atoms as nodes and bonds as edges, while the other graph uses bonds as the nodes and bond angles as the edges. ",
     "Mode": "Pretrained",
     "Task": ["Representation"],
-    "Input": "Compound",
+    "Input": ["Compound"],
     "Input Shape": "Single",
     "Output": ["Boolean"],
     "Output Type": ["Float"],
