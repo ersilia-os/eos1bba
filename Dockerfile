@@ -8,6 +8,7 @@ RUN pip install networkx
 RUN pip install paddlepaddle
 RUN pip install pgl
 RUN pip install sklearn
+RUN pip install -U scikit-learn
 RUN pip install rdkit-pypi
 
 WORKDIR /repo
