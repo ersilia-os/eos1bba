@@ -28,8 +28,20 @@ from GEM.src.utils import get_dataset, create_splitter, get_downstream_task_name
 input_file = sys.argv[1]
 output_file = sys.argv[2]
 
+/Users/work/eos1bba/model/framework/code/main.py
+
 # current file directory
 root = os.path.dirname(os.path.abspath(__file__))
+two_dir_up=os.fspath(root.parent.parent).resolve()
+compound_encoder_path = "checkpoints/model_configs/geognn_l8.json"
+compound_encoder_dir = os.path.join(two_dir_up, compound_encoder_path)
+model_config_path = "checkpoints/model_configs/down_mlp3.json"
+model_config_dir = os.path.join(two_dir_up, model_config_path)
+model_params_path = "pretrain_models-chemrl_gem/class.pdparams"
+model_params_dir = os.path.join(two_dir_up, model_params_path)
+
+
+
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
@@ -41,15 +53,15 @@ with open(input_file, "r") as f:
 
 # my model
 def my_model(smiles_list):
-    task_names = get_default_bbbp_task_names()  #edit this based on what we want output tasks to be.
+    task_names = get_default_toxcast_task_names  #edit this based on what we want output tasks to be.
     print(task_names)
 
 #task_type = "class" or "regr". 
 
     print(smiles_list)
 
-    compound_encoder_config = load_json_config("/Users/karthik/eos1bba/model/checkpoints/model_configs/geognn_l8.json")
-    model_config = load_json_config("/Users/karthik/eos1bba/model/checkpoints/model_configs/down_mlp3.json")
+    compound_encoder_config = load_json_config(compound_encoder_dir)
+    model_config = load_json_config(model_config_dir)
     model_config['num_tasks'] = len(task_names)
     model_config['task_type'] = "class"
     output = []
@@ -61,7 +73,7 @@ def my_model(smiles_list):
 # criterion = nn.BCELoss(reduction='none')
 # opt = paddle.optimizer.Adam(0.001, parameters=model.parameters())
 
-    model.set_state_dict(paddle.load('/Users/karthik/eos1bba/model/checkpoints/pretrain_models-chemrl_gem/class.pdparams')) #edit this
+    model.set_state_dict(paddle.load(model_params_dir))
 
 #SMILES="CCCCC(CC)COC(=O)c1ccc(C(=O)OCC(CC)CCCC)c(C(=O)OCC(CC)CCCC)c1"
     transform_fn = DownstreamTransformFn(is_inference=True)
@@ -76,9 +88,9 @@ def my_model(smiles_list):
         graph1, graph2 = collate_fn([transform_fn({'smiles': smiles})])
         preds = model(graph1.tensor(), graph2.tensor()).numpy()[0]
         print('SMILES:%s' % smiles)
-        print('Predictions:')
+        print('Predictions:')  #add another for loop here to account for each task. For each task, write task name and then the preds.
         for name, prob in zip(task_names, preds):
-            output.append(prob)
+            output.append("  %s:\t%s" % (name, prob))
             print("  %s:\t%s" % (name, prob))
     
     return output
