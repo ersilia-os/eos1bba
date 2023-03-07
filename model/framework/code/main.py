@@ -31,7 +31,7 @@ output_file = sys.argv[2]
 
 # current file directory
 root = os.path.dirname(os.path.abspath(__file__))
-two_dir_up =  (os.path.dirname(os.path.dirname(root))).resolve()
+two_dir_up =  (os.path.dirname(os.path.dirname(root)))
 compound_encoder_path = "checkpoints/model_configs/geognn_l8.json"
 compound_encoder_dir = os.path.join(two_dir_up, compound_encoder_path)
 model_config_path = "checkpoints/model_configs/down_mlp3.json"
