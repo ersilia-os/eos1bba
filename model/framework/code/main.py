@@ -45,7 +45,7 @@ model_params_dir = os.path.join(two_dir_up, model_params_path)
 with open(input_file, "r") as f:
     reader = csv.reader(f)
     next(reader)  # skip header.
-    smiles_list = [r[1] for r in reader]
+    smiles_list = [r[0] for r in reader]
 
 
 #inputs for the model are the task names, the task_type, and the number of tasks. 
