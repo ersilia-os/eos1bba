@@ -28,7 +28,6 @@ from GEM.src.utils import get_dataset, create_splitter, get_downstream_task_name
 input_file = sys.argv[1]
 output_file = sys.argv[2]
 
-/Users/work/eos1bba/model/framework/code/main.py
 
 # current file directory
 root = os.path.dirname(os.path.abspath(__file__))
