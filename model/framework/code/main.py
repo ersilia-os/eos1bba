@@ -52,12 +52,12 @@ with open(input_file, "r") as f:
 
 # my model
 def my_model(smiles_list):
-    task_names = get_default_toxcast_task_names  #edit this based on what we want output tasks to be.
-    print(task_names)
+    task_names = get_default_toxcast_task_names()  #edit this based on what we want output tasks to be.
+    #print(task_names)
 
 #task_type = "class" or "regr". 
 
-    print(smiles_list)
+    #print(smiles_list)
 
     compound_encoder_config = load_json_config(compound_encoder_dir)
     model_config = load_json_config(model_config_dir)
