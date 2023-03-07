@@ -36,7 +36,7 @@ compound_encoder_path = "checkpoints/model_configs/geognn_l8.json"
 compound_encoder_dir = os.path.join(two_dir_up, compound_encoder_path)
 model_config_path = "checkpoints/model_configs/down_mlp3.json"
 model_config_dir = os.path.join(two_dir_up, model_config_path)
-model_params_path = "pretrain_models-chemrl_gem/class.pdparams"
+model_params_path = "checkpoints/pretrain_models-chemrl_gem/class.pdparams"
 model_params_dir = os.path.join(two_dir_up, model_params_path)
 
 
