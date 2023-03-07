@@ -52,7 +52,7 @@ with open(input_file, "r") as f:
 
 # my model
 def my_model(smiles_list):
-    task_names = get_default_toxcast_task_names()  #edit this based on what we want output tasks to be.
+    task_names = get_default_bace_task_names()()  #edit this based on what we want output tasks to be.
     #print(task_names)
 
 #task_type = "class" or "regr". 
