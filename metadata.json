@@ -11,7 +11,7 @@
     "Output": ["Boolean"],
     "Output Type": ["Float"],
     "Output Shape": "Single",
-    "Interpretation": "The output gives us a decimal value. Depending on the input tasks, we can ",
+    "Interpretation": "The output gives us a decimal value. Depending on the input tasks, we either get a classification or a regression. If we use the parameters for a regression classification, we get a decimal value. ",
     "Tag": [
         "Chemical graph model"
     ],
