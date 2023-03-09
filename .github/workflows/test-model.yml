@@ -36,19 +36,6 @@ jobs:
           conda init
           python -m pip install git+https://github.com/ersilia-os/ersilia.git@e7f64517c2d0881119cfcdc379054b79dffab6f0
   
-      - name: Update metadata to AirTable
-        id: update-metadata-to-airtable
-        env:
-          USER_NAME: ${{ github.repository_owner }}
-          BRANCH: "main"
-          REPO_NAME: ${{ github.event.repository.name }}
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-        run: |
-          source activate
-          echo "Updating metadata to AirTable looking at owner: $USER_NAME"
-          wget https://raw.githubusercontent.com/ersilia-os/ersilia/master/.github/scripts/update_metadata_to_airtable.py
-          python3 update_metadata_to_airtable.py $USER_NAME $REPO_NAME $BRANCH $AIRTABLE_API_KEY
-          rm update_metadata_to_airtable.py
       - name: Update README file
         id: update-readme-file
         env:
