@@ -75,10 +75,12 @@ def my_model(smiles_list):
             task_type = task_type,
             is_inference=True)
     for smiles in smiles_list:
+        smile_values = []
         graph1, graph2 = collate_fn([transform_fn({'smiles': smiles})])
         preds = model(graph1.tensor(), graph2.tensor()).numpy()[0]
         for name, prob in zip(task_names, preds):
-            output.append("  %s:\t%s" % (name, prob))
+            smile_values.append("  %s:\t%s" % (name, prob))
+        output.append(smile_values)    
     return output
 
 # run model
@@ -87,6 +89,7 @@ outputs = my_model(smiles_list)
 # write output in a .csv file
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(["values"])  # header
+    writer.writerow(['NR-AR', 'NR-AR-LBD', 'NR-AhR', 'NR-Aromatase', 'NR-ER', 'NR-ER-LBD',
+           'NR-PPAR-gamma', 'SR-ARE', 'SR-ATAD5', 'SR-HSE', 'SR-MMP', 'SR-p53'])  # header
     for o in outputs:
         writer.writerow(o)
