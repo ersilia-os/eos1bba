@@ -44,50 +44,41 @@ model_params_dir = os.path.join(two_dir_up, model_params_path)
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
-    next(reader)  # skip header.
+    next(reader)  # read header.
     smiles_list = [r[0] for r in reader]
 
 
-#inputs for the model are the task names, the task_type, and the number of tasks. 
-
 # my model
 def my_model(smiles_list):
-    task_names = get_default_bace_task_names()  #edit this based on what we want output tasks to be.
-    #print(task_names)
-
-#task_type = "class" or "regr". 
-
-    #print(smiles_list)
+    task_names = get_default_tox21_task_names()  
+    task_type = "regr"  #task_type can be "class" or "regr". 
 
     compound_encoder_config = load_json_config(compound_encoder_dir)
     model_config = load_json_config(model_config_dir)
     model_config['num_tasks'] = len(task_names)
-    model_config['task_type'] = "class"
+    model_config['task_type'] = task_type
     output = []
-#
 
 
     compound_encoder = GeoGNNModel(compound_encoder_config)
     model = DownstreamModel(model_config, compound_encoder)
-# criterion = nn.BCELoss(reduction='none')
-# opt = paddle.optimizer.Adam(0.001, parameters=model.parameters())
+
 
     model.set_state_dict(paddle.load(model_params_dir))
 
-#SMILES="CCCCC(CC)COC(=O)c1ccc(C(=O)OCC(CC)CCCC)c(C(=O)OCC(CC)CCCC)c1"
     transform_fn = DownstreamTransformFn(is_inference=True)
     collate_fn = DownstreamCollateFn(
             atom_names=compound_encoder_config['atom_names'], 
             bond_names=compound_encoder_config['bond_names'],
             bond_float_names=compound_encoder_config['bond_float_names'],
             bond_angle_float_names=compound_encoder_config['bond_angle_float_names'],
-            task_type = "class",
+            task_type = task_type,
             is_inference=True)
     for smiles in smiles_list:
         graph1, graph2 = collate_fn([transform_fn({'smiles': smiles})])
         preds = model(graph1.tensor(), graph2.tensor()).numpy()[0]
         print('SMILES:%s' % smiles)
-        print('Predictions:')  #add another for loop here to account for each task. For each task, write task name and then the preds.
+        print('Predictions:') 
         for name, prob in zip(task_names, preds):
             output.append("  %s:\t%s" % (name, prob))
             print("  %s:\t%s" % (name, prob))
