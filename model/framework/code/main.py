@@ -50,8 +50,8 @@ with open(input_file, "r") as f:
 
 # my model
 def my_model(smiles_list):
-    task_names = get_default_tox21_task_names()  
-    task_type = "regr"  #task_type can be "class" or "regr". 
+    task_names = get_default_bbbp_task_names()  
+    task_type = "class"  #task_type can be "class" or "regr". 
 
     compound_encoder_config = load_json_config(compound_encoder_dir)
     model_config = load_json_config(model_config_dir)
