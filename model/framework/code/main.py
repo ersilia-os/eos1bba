@@ -44,7 +44,7 @@ model_params_dir = os.path.join(two_dir_up, model_params_path)
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
-    row1 = next(reader)  # read header.
+    next(reader)  # read header.
     smiles_list = [r[0] for r in reader]
 
 
