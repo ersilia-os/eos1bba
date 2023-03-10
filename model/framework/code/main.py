@@ -78,7 +78,7 @@ def my_model(smiles_list):
         graph1, graph2 = collate_fn([transform_fn({'smiles': smiles})])
         preds = model(graph1.tensor(), graph2.tensor()).numpy()[0]
         for name, prob in zip(task_names, preds):
-            output.append("%s %s:\t%s" % (smiles, name, prob))
+            output.append("%s %s: %s" % (smiles, name, prob))
     return output
 
 # run model
