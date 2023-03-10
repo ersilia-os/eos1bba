@@ -84,8 +84,6 @@ def my_model(smiles_list):
 # run model
 outputs = my_model(smiles_list)
 
-for x in range(len(outputs)):
-    print (outputs[x])
 
 # write output in a .csv file
 with open(output_file, "w") as f:
