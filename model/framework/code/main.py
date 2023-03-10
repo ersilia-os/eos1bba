@@ -89,4 +89,4 @@ with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(["values"])  # header
     for o in outputs:
-        writer.writerow(o)
+        writer.writerow([o])
