@@ -45,22 +45,18 @@ model_params_dir = os.path.join(two_dir_up, model_params_path)
 with open(input_file, "r") as f:
     reader = csv.reader(f)
     row1 = next(reader)  # read header.
-    task_type = row1[3]
-    task_name = row1[:4]
     smiles_list = [r[0] for r in reader]
 
-
-#inputs for the model are the task names, the task_type, and the number of tasks.
 
 # my model
 def my_model(smiles_list):
     task_names = get_default_tox21_task_names()  
-    task_type = "regr"
+    task_type = "regr"  #task_type can be "class" or "regr". 
 
     compound_encoder_config = load_json_config(compound_encoder_dir)
     model_config = load_json_config(model_config_dir)
     model_config['num_tasks'] = len(task_names)
-    model_config['task_type'] = task_type #task_type can be "class" or "regr". 
+    model_config['task_type'] = task_type
     output = []
 
 
