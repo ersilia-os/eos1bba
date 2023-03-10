@@ -78,11 +78,14 @@ def my_model(smiles_list):
         graph1, graph2 = collate_fn([transform_fn({'smiles': smiles})])
         preds = model(graph1.tensor(), graph2.tensor()).numpy()[0]
         for name, prob in zip(task_names, preds):
-            output.append("  %s:\t%s" % (name, prob))
+            output.append("%s %s:\t%s" % (smiles, name, prob))
     return output
 
 # run model
 outputs = my_model(smiles_list)
+
+for x in range(len(outputs)):
+    print (outputs[x])
 
 # write output in a .csv file
 with open(output_file, "w") as f:
