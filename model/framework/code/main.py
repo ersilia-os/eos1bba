@@ -50,8 +50,8 @@ with open(input_file, "r") as f:
 
 # my model
 def my_model(smiles_list):
-    task_names = get_default_bbbp_task_names()  
-    task_type = "class"  #task_type can be "class" or "regr". 
+    task_names = get_default_tox21_task_names()  
+    task_type = "regr"  #task_type can be "class" or "regr". 
 
     compound_encoder_config = load_json_config(compound_encoder_dir)
     model_config = load_json_config(model_config_dir)
@@ -78,7 +78,8 @@ def my_model(smiles_list):
         graph1, graph2 = collate_fn([transform_fn({'smiles': smiles})])
         preds = model(graph1.tensor(), graph2.tensor()).numpy()[0]
         for name, prob in zip(task_names, preds):
-            output.append("%s %s: %s" % (smiles, name, prob))
+            output.append("%f" % (prob))
+            #output.append("%s %s: %s" % (smiles, name, prob))
     return output
 
 # run model
