@@ -82,7 +82,9 @@ def my_model(smiles_list):
             tasks_list.append("%f" % (prob))
             output.append(tasks_list)
             #output.append("%s %s: %s" % (smiles, name, prob))
+    print(output[0])
     return output
+
 
 # run model
 outputs = my_model(smiles_list)

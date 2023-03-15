@@ -10,7 +10,7 @@
     "Input Shape": "Single",
     "Output": ["Boolean"],
     "Output Type": ["Float"],
-    "Output Shape": "Single",
+    "Output Shape": "List",
     "Interpretation": "The output gives us a decimal value. This model currently uses regression to determine the outputs. The outputs that we test are from the tox21 dataset and are the following: NR-AR, NR-AR-LBD, NR-AhR, NR-Aromatase, NR-ER, NR-ER-LBD, NR-PPAR-gamma, SR-ARE, SR-ATAD5, SR-HSE, SR-MMP, SR-p53.", 
     "Tag": [
         "Chemical graph model", "ZINC"
