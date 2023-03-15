@@ -75,10 +75,12 @@ def my_model(smiles_list):
             task_type = task_type,
             is_inference=True)
     for smiles in smiles_list:
+        tasks_list = []
         graph1, graph2 = collate_fn([transform_fn({'smiles': smiles})])
         preds = model(graph1.tensor(), graph2.tensor()).numpy()[0]
         for name, prob in zip(task_names, preds):
-            output.append("%f" % (prob))
+            tasks_list.append("%f" % (prob))
+            output.append(tasks_list)
             #output.append("%s %s: %s" % (smiles, name, prob))
     return output
 
@@ -91,4 +93,5 @@ with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(["values"])  # header
     for o in outputs:
-        writer.writerow([o])
+        for i in o:
+            writer.writerow([i])
