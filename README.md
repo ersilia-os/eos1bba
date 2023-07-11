@@ -23,6 +23,9 @@ This model uses Graph Neural Networks to represent atoms, bonds, and bond angles
 * [Source Code](https://github.com/PaddlePaddle/PaddleHelix/tree/dev/apps/pretrained_compound/ChemRL/GEM)
 * Ersilia contributor: [karthikjetty](https://github.com/karthikjetty)
 
+## Ersilia model URLs
+* [GitHub](https://github.com/ersilia-os/eos1bba)
+
 ## Citation
 
 If you use this model, please cite the [original authors](https://www.nature.com/articles/s42256-021-00438-4) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
