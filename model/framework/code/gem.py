@@ -1,10 +1,6 @@
 # imports
 import os
-import csv
-import sys
 
-
-import numpy as np
 import multiprocessing
 multiprocessing.set_start_method('fork') 
 
