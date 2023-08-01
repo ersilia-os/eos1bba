@@ -25,6 +25,8 @@ This model uses Graph Neural Networks to represent atoms, bonds, and bond angles
 
 ## Ersilia model URLs
 * [GitHub](https://github.com/ersilia-os/eos1bba)
+* [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1bba.zip)
+* [DockerHub](https://hub.docker.com/r/ersiliaos/eos1bba) (AMD64)
 
 ## Citation
 

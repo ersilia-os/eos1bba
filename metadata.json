@@ -5,17 +5,31 @@
     "Title": "GeoGNN Molecular Representation Prediction",
     "Description": "This model uses Graph Neural Networks to represent atoms, bonds, and bond angles in a molecule which can be used to predict properties of molecules. The model combines two graphs, one of which uses atoms as nodes and bonds as edges, while the other graph uses bonds as the nodes and bond angles as the edges. This model was pretrained used the ZINC demo dataset and and currently predicts properties for SMILES in the tox21 dataset. However, this model can be finetuned to predict properties of several other molecules. To determine how to do this, look through the source code from the github repository linked below. From there, we can downstream finetune the model so that the model can make better predictions for specific properties. ",
     "Mode": "Pretrained",
-    "Task": ["Representation"],
-    "Input": ["Compound"],
+    "Task": [
+        "Representation"
+    ],
+    "Input": [
+        "Compound"
+    ],
     "Input Shape": "Single",
-    "Output": ["Descriptor"],
-    "Output Type": ["Float"],
+    "Output": [
+        "Descriptor"
+    ],
+    "Output Type": [
+        "Float"
+    ],
     "Output Shape": "List",
-    "Interpretation": "The output gives us a decimal value. This model currently uses regression to determine the outputs. The outputs that we test are from the tox21 dataset and are the following: NR-AR, NR-AR-LBD, NR-AhR, NR-Aromatase, NR-ER, NR-ER-LBD, NR-PPAR-gamma, SR-ARE, SR-ATAD5, SR-HSE, SR-MMP, SR-p53.", 
+    "Interpretation": "The output gives us a decimal value. This model currently uses regression to determine the outputs. The outputs that we test are from the tox21 dataset and are the following: NR-AR, NR-AR-LBD, NR-AhR, NR-Aromatase, NR-ER, NR-ER-LBD, NR-PPAR-gamma, SR-ARE, SR-ATAD5, SR-HSE, SR-MMP, SR-p53.",
     "Tag": [
-        "Chemical graph model", "ZINC"
+        "Chemical graph model",
+        "ZINC"
     ],
     "Publication": "https://www.nature.com/articles/s42256-021-00438-4",
     "Source Code": "https://github.com/PaddlePaddle/PaddleHelix/tree/dev/apps/pretrained_compound/ChemRL/GEM",
-    "License": "Apache-2.0"
+    "License": "Apache-2.0",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1bba.zip",
+    "DockerHub": "https://hub.docker.com/r/ersiliaos/eos1bba",
+    "Docker Architecture": [
+        "AMD64"
+    ]
 }
